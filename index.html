@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store.it</title>
+    <link rel="icon" type="image/png" href="lock.png">
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ========== LOGIN SCREEN ========== -->
+        <div id="loginScreen" class="screen active">
+            <h1>🔐 Store.it</h1>
+            <p class="subtitle">Welcome back! Please login to continue</p>
+
+            <div id="loginMessage" class="message"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                    <span class="error-message" id="loginEmailError">Please enter a valid email</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        <span class="toggle-icon" onclick="togglePassword('loginPassword')">👁️</span>
+                    </div>
+                    <span class="error-message" id="loginPasswordError">Please enter your password</span>
+                </div>
+
+                <div style="text-align: right; margin-bottom: 15px;">
+                    <a href="#" onclick="handleForgotPassword()" style="color: #667eea; text-decoration: none; font-size: 14px;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary btn-full">Login</button>
+            </form>
+
+            <div class="link-text">
+                Don't have an account? <a href="#" onclick="showScreen('signupScreen')">Sign Up</a>
+            </div>
+        </div>
+
+        <!-- ========== SIGNUP SCREEN ========== -->
+        <div id="signupScreen" class="screen">
+            <h1>📝 Create Account</h1>
+            <p class="subtitle">Join us today! Fill in your details</p>
+
+            <div id="signupMessage" class="message"></div>
+
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name *</label>
+                    <input type="text" id="signupName" placeholder="Enter your full name" required>
+                    <span class="error-message" id="signupNameError">Please enter a valid name</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupEmail">Email Address *</label>
+                    <input type="email" id="signupEmail" placeholder="example@email.com" required>
+                    <span class="error-message" id="signupEmailError">Please enter a valid email</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupPassword">Password *</label>
+                    <div class="password-toggle">
+                        <input type="password" id="signupPassword" placeholder="Minimum 6 characters" required>
+                        <span class="toggle-icon" onclick="togglePassword('signupPassword')">👁️</span>
+                    </div>
+                    <span class="error-message" id="signupPasswordError">Password must be at least 6 characters</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password *</label>
+                    <div class="password-toggle">
+                        <input type="password" id="signupConfirmPassword" placeholder="Re-enter password" required>
+                        <span class="toggle-icon" onclick="togglePassword('signupConfirmPassword')">👁️</span>
+                    </div>
+                    <span class="error-message" id="signupConfirmPasswordError">Passwords do not match</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupSecurityQuestion">Security Question *</label>
+                    <select id="signupSecurityQuestion" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background: white;">
+                        <option value="">-- Select a Question --</option>
+                        <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                        <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                        <option value="What was the name of your first school?">What was the name of your first school?</option>
+                        <option value="What is your favorite food?">What is your favorite food?</option>
+                    </select>
+                    <span class="error-message" id="signupSecurityQuestionError">Please select a security question</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupSecurityAnswer">Security Answer *</label>
+                    <input type="text" id="signupSecurityAnswer" placeholder="Enter your answer" required>
+                    <span class="error-message" id="signupSecurityAnswerError">Please enter an answer</span>
+                </div>
+
+                <button type="submit" class="btn-primary btn-full">Create Account</button>
+            </form>
+
+            <div class="link-text">
+                Already have an account? <a href="#" onclick="showScreen('loginScreen')">Login</a>
+            </div>
+        </div>
+
+        <!-- ========== DASHBOARD SCREEN ========== -->
+        <div id="dashboardScreen" class="screen">
+            <div class="welcome-header">
+                <h2>Welcome, <span class="user-name" id="dashboardUserName"></span>! 👋</h2>
+            </div>
+
+            <div id="dashboardMessage" class="message"></div>
+
+            <div class="dashboard-grid" style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+                <div class="profile-card" style="flex: 1; min-width: 300px;">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">👤 Your Profile</h3>
+                    <div class="profile-row">
+                        <span class="profile-label">Name:</span>
+                        <span class="profile-value" id="profileName"></span>
+                    </div>
+                    <div class="profile-row">
+                        <span class="profile-label">Email:</span>
+                        <span class="profile-value" id="profileEmail"></span>
+                    </div>
+                    <div class="profile-row">
+                        <span class="profile-label">Phone:</span>
+                        <span class="profile-value" id="profilePhone"></span>
+                    </div>
+                </div>
+                <div id="vaultContainer" style="flex: 1; min-width: 300px;"></div>
+            </div>
+
+        </div>
+
+        <!-- ========== REGISTRATION FORM SCREEN ========== -->
+        <div id="registrationScreen" class="screen">
+            <h1>📚 Update Profile </h1>
+            <p class="subtitle">Complete your profile information</p>
+
+            <div id="registrationMessage" class="message"></div>
+
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" placeholder="Enter your full name" required>
+                    <span class="error-message" id="nameError">Please enter a valid name</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" placeholder="example@email.com" required readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" placeholder="1234567890" required>
+                    <span class="error-message" id="phoneError">Please enter a valid 10-digit phone number</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="updateSecurityQuestion">Security Question</label>
+                    <select id="updateSecurityQuestion" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background: white;">
+                        <option value="">-- Select a Question --</option>
+                        <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                        <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                        <option value="What was the name of your first school?">What was the name of your first school?</option>
+                        <option value="What is your favorite food?">What is your favorite food?</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="updateSecurityAnswer">Security Answer</label>
+                    <input type="text" id="updateSecurityAnswer" placeholder="Enter your answer">
+                </div>
+
+                <div class="form-group" style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+                    <label style="font-weight: bold; color: #667eea;">Change Password (Optional)</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="updatePassword">New Password</label>
+                    <input type="password" id="updatePassword" placeholder="Leave blank to keep current">
+                    <input type="password" id="updateConfirmPassword" placeholder="Re-enter new password" style="margin-top: 10px;">
+                    <span class="error-message" id="updatePasswordError">Passwords do not match or too short</span>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn-primary">💾 Save Data</button>
+                    <button type="button" class="btn-danger" onclick="clearForm()">🗑️ Clear Data</button>
+                    <button type="button" class="btn-secondary" onclick="backToDashboard()">← Back</button>
+                </div>
+            </form>
+
+            <div class="storage-info">
+                <strong>ℹ️ Storage Info:</strong> This application now uses LocalStorage. Your data will persist even if you refresh the page.
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
