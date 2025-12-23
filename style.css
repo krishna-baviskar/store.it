@@ -299,4 +299,125 @@ button:active {
     .button-group {
         flex-direction: column;
     }
+
+    .vault-form-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .vault-btn-save {
+        width: 100%;
+        padding: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+        width: 95%;
+    }
+    
+    .dashboard-item {
+        min-width: 100% !important;
+    }
+    
+    .profile-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .profile-value {
+        width: 100%;
+        word-break: break-word;
+    }
+}
+
+/* Responsive Dashboard Grid */
+.dashboard-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.dashboard-item {
+    flex: 1;
+    min-width: 280px;
+}
+
+/* Vault Section Styles */
+.vault-section {
+    margin-top: 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-top: 4px solid #4caf50;
+}
+
+.vault-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.vault-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.vault-btn-save {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    height: 100%;
+    min-height: 38px;
+}
+
+/* Responsive Table */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 15px;
+}
+
+/* GitHub Floating Button */
+.github-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #24292e;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    text-decoration: none;
+}
+
+.github-float:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    background-color: #000;
+}
+
+.github-float svg {
+    width: 32px;
+    height: 32px;
+    fill: white;
 }
