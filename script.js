@@ -338,27 +338,22 @@ const VaultManager = {
         if (!vaultSection) {
             vaultSection = document.createElement('div');
             vaultSection.id = 'vaultSection';
-            vaultSection.style.marginTop = '0';
-            vaultSection.style.padding = '20px';
-            vaultSection.style.backgroundColor = '#fff';
-            vaultSection.style.borderRadius = '8px';
-            vaultSection.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
-            vaultSection.style.borderTop = '4px solid #4caf50';
+            vaultSection.className = 'vault-section';
             
             vaultSection.innerHTML = `
                 <h2 style="color: #333; margin-bottom: 20px;">
                     🔐 Store.it Vault
                 </h2>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; margin-bottom: 20px; background: #f9f9f9; padding: 15px; border-radius: 6px;">
-                    <input type="text" id="vSite" placeholder="App / Website Name" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="text" id="vUser" placeholder="Username / Email" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                    <input type="password" id="vPass" placeholder="Password" style="padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                    <button onclick="VaultManager.add()" style="background: #4caf50; color: white; border: none; padding: 0 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">Save</button>
+                <div class="vault-form-grid">
+                    <input type="text" id="vSite" placeholder="App / Website Name" class="vault-input">
+                    <input type="text" id="vUser" placeholder="Username / Email" class="vault-input">
+                    <input type="password" id="vPass" placeholder="Password" class="vault-input">
+                    <button onclick="VaultManager.add()" class="vault-btn-save">Save</button>
                 </div>
                 
                 <div style="margin-bottom: 15px;">
-                    <input type="text" id="vSearch" placeholder="🔍 Search passwords..." oninput="VaultManager.filter()" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                    <input type="text" id="vSearch" placeholder="🔍 Search passwords..." oninput="VaultManager.filter()" class="vault-input">
                 </div>
                 
                 <div id="vaultList"></div>
@@ -464,7 +459,8 @@ const VaultManager = {
         }
         
         let html = `
-            <table style="width: 100%; border-collapse: collapse;">
+            <div class="table-responsive">
+            <table style="width: 100%; border-collapse: collapse; min-width: 600px;">
                 <thead>
                     <tr style="background: #eee; color: #333;">
                         <th style="padding: 10px; text-align: left;">App / Site</th>
@@ -494,7 +490,7 @@ const VaultManager = {
             `;
         });
         
-        html += '</tbody></table>';
+        html += '</tbody></table></div>';
         listContainer.innerHTML = html;
     }
 };
@@ -796,11 +792,19 @@ function init3DBackground() {
     // 1. Inject CSS for background layers and content visibility
     const style = document.createElement('style');
     style.textContent = `
-        #vanta-waves { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; }
-        #vanta-net { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
-        #vanta-birds { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        #vanta-waves, #vanta-net, #vanta-birds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translate3d(0,0,0);
+        }
+        #vanta-waves { z-index: -3; }
+        #vanta-net { z-index: -2; pointer-events: none; }
+        #vanta-birds { z-index: -1; pointer-events: none; }
         .screen { background: rgba(255, 255, 255, 0.95); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        body { background-color: #000; }
+        body { background-color: #000; margin: 0; overflow-x: hidden; }
     `;
     document.head.appendChild(style);
 
