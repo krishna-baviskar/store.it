@@ -97,3 +97,7 @@ Because Store.it uses **LocalStorage**:
 
 ---
 *Your data, your device, your control.*
+
+##Lead Developer
+#Krishna Somnath Baviskar
+krishnabaviskar40@gmail.com
