@@ -9,7 +9,7 @@ In an age of frequent data breaches, Store.it offers a unique value proposition:
 1.  **Zero-Knowledge Architecture**:
     *   **No Backend Server**: Your passwords never leave your device. There is no database for hackers to breach.
     *   **Client-Side Only**: All encryption and storage logic happens right in your browser.
-
+ 
 2.  **Instant & Offline**:
     *   Works perfectly without an internet connection.
     *   No loading times for server requests.
